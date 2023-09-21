@@ -1,16 +1,19 @@
+import 'dotenv/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {ClientsModule, Transport} from "@nestjs/microservices";
+import { UserController } from './microservices/user/user.controller';
+import {RMQ_EVENT_TARGET} from "./applications/interface/event-rmq.interface";
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'USER_SERVICE',
+        name: RMQ_EVENT_TARGET.USER_SERVICE,
         transport: Transport.RMQ,
         options: {
-          urls: ['amqps://nifgfcyd:XjzIKX8FXA5jWTd3imueuIKXwx_aDYeQ@moose.rmq.cloudamqp.com/nifgfcyd'],
+          urls: [process.env.RMQ_URL],
           queue: 'user_queue',
           queueOptions: {
             durable: false
@@ -20,10 +23,10 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
     ]),
     ClientsModule.register([
       {
-        name: 'TASK_SERVICE',
+        name: RMQ_EVENT_TARGET.TASK_SERVICE,
         transport: Transport.RMQ,
         options: {
-          urls: ['amqps://nifgfcyd:XjzIKX8FXA5jWTd3imueuIKXwx_aDYeQ@moose.rmq.cloudamqp.com/nifgfcyd'],
+          urls: [process.env.RMQ_URL],
           queue: 'task_queue',
           queueOptions: {
             durable: false
@@ -32,7 +35,7 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
       },
     ]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, UserController],
   providers: [AppService],
 })
 export class AppModule {}
