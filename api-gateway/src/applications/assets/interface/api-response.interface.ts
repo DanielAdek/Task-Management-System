@@ -1,4 +1,4 @@
-import {ApiResponse} from "../../response/api.response";
+import {ApiResponse} from "../response/api.response";
 
 export interface IApiResponseBuilder {
   seData?(): ApiResponse;
