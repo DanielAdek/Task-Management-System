@@ -7,7 +7,7 @@ LABEL authors="Daniel Adek"
 RUN npm i -g yarn@1.22.19
 
 # Set the working directory inside the container
-WORKDIR /usr/src/task-microservice
+WORKDIR /usr/src/user-microservice
 
 # Copy package.json and package-lock.json (if present) to the working directory
 COPY package*.json ./
