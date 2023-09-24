@@ -1,4 +1,5 @@
 import {TASK_PRIORITY} from "../enum/task.enum";
+import {IProject} from "./project.interface";
 
 export interface ITask {
   id: string;
@@ -17,4 +18,14 @@ export interface ITaskService {
   handleDueTasksAsync(): ITask[];
   assignTaskAsync(id: string): ITask | undefined;
   updateTask(id: string, updates: Partial<ITask>): void;
+}
+
+
+export interface ITaskPaginated extends ITask {
+  project: IProject
+}
+
+export type ITaskPaginatedParam = {
+  limit: number;
+  page: number;
 }
