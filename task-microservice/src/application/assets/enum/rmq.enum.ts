@@ -7,6 +7,7 @@ export enum RMQ_TARGET {
   CREATE_TASK = '#create-task',
   ASSIGN_TASK = "#assign-task",
   UPDATE_TASK = "#update-task",
+  GET_TASKS = "#get-tasks",
 
   // ...notification event triggers...
   SEND_EMAIL_TASK_CREATE = "#task-create-send-email",
