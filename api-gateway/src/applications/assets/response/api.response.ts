@@ -1,5 +1,6 @@
-import { ResponseStatus } from "../interface/api-response.interface";
 import {HttpStatus} from "@nestjs/common";
+import {ResponseStatus} from "../enum/response.enum";
+
 export class ApiResponse {
   private readonly data;
 
