@@ -59,15 +59,16 @@ export class NotificationService {
 
   public async sendEmailOnTaskDue(payload: SendEmailTaskPayload): Promise<void> {
     try {
-      const { assignee, recipient, title } = payload;
+      const { assignee, recipient, title, deadline } = payload;
       const email_request = {
         from: envManager.getEnvValue("MAIL_FROM"),
-        subject: `${assignee}, A task has been created for you`,
-        template: "task-create",
+        subject: `Task ${title} due`,
+        template: "task-due",
         to: recipient,
         context: {
           username: assignee,
-          title
+          title,
+          deadline: new Date(deadline)
         }
       }
       await this.mailerService.sendMail(email_request);
