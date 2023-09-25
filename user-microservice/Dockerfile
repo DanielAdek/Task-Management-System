@@ -10,7 +10,7 @@ WORKDIR /usr/src/user-microservice
 COPY package*.json ./
 
 # Install all the project dependencies
-RUN yarn install
+RUN npm install
 
 # Copy the rest of the application source code
 COPY . .
