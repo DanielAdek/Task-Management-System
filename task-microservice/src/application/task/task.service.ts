@@ -140,8 +140,6 @@ export class TaskService {
           assignee: user_response.data.username
         };
 
-        this.logger.log(payload)
-
         await firstValueFrom(
           this.notifyServiceClient.send<IApiResponse<object>>(RMQ_TARGET.SEND_NOTIFY_TASK_DUE, payload)
         );
