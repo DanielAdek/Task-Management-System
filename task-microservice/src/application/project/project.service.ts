@@ -6,9 +6,8 @@ import { Project } from "../../domain/project/proj-entity.model";
 import { ApiResponseBuilder } from "../assets/response/api.response";
 import {ProjectDto} from "../assets/dtos/project.dto";
 import {IApiResponse} from "../assets/interfaces/api-response.interface";
-import {Task} from "../../domain/task/task-entity.model";
 import {IProjectParam, IProjects} from "../assets/interfaces/project.interface";
-import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
+import {paginate, Pagination} from "nestjs-typeorm-paginate";
 
 @Injectable()
 export class ProjectService {
