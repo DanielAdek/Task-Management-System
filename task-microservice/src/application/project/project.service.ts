@@ -45,7 +45,7 @@ export class ProjectService {
    */
   public async getProjectsAsync(payload: IProjectParam): Promise<IApiResponse<Pagination<IProjects>>> {
     try {
-      const searchOptions = { loadRelationIds: true, relations: ["tasks"]};
+      const searchOptions = { loadRelationIds: false, relations: ["tasks"]};
 
       const projects: Pagination<Project> = await paginate<Project>(this.repository, payload, searchOptions);
 
