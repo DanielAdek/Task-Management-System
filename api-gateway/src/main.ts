@@ -28,7 +28,7 @@ class MainApiGateway {
 
     this.apiDocsConfig(app);
 
-    await app.listen(process.env.PORT);
+    await app.listen(process.env.PORT || 8080);
   }
 
   public static async run() {
