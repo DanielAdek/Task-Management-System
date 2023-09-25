@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:18.15.0-alpine
+FROM node:18.15.0
 
 LABEL authors="Daniel Adek"
 
@@ -10,7 +10,7 @@ WORKDIR /usr/src/user-microservice
 COPY package*.json ./
 
 # Install all the project dependencies
-RUN npm install
+RUN yarn install
 
 # Copy the rest of the application source code
 COPY . .
