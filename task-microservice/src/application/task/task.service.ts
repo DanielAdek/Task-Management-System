@@ -89,7 +89,7 @@ export class TaskService {
    */
   public async getTasksAsync(payload: IPaginationOptions): Promise<IApiResponse<Pagination<typeof Task>>> {
     try {
-      const searchOptions = { loadRelationIds: true, relations: ["project"]};
+      const searchOptions = { loadRelationIds: false, relations: ["project"]};
 
       const tasks: Pagination<Task> = await paginate<Task>(this.repository, payload, searchOptions);
 
