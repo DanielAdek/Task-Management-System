@@ -3,9 +3,6 @@ FROM node:18.15.0-alpine
 
 LABEL authors="Daniel Adek"
 
-# Install specific yarn package
-RUN npm i -g yarn@1.22.19
-
 # Set the working directory inside the container
 WORKDIR /usr/src/notification-microservice
 

@@ -68,7 +68,7 @@ export class NotificationService {
         context: {
           username: assignee,
           title,
-          deadline: new Date(deadline)
+          deadline: new Date(deadline).toDateString()
         }
       }
       await this.mailerService.sendMail(email_request);
