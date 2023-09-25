@@ -14,7 +14,7 @@ services:
       - user-service
       - task-service
       - notification-service
-      - rmq-infrastructure
+      - rabbitmq
 
   task-service:
     build: ./task-microservice
@@ -25,8 +25,8 @@ services:
     networks:
       - backend
     depends_on:
-      - db
-      - rmq-infrastructure
+      - postgres
+      - rabbitmq
 
   notification-service:
     build: ./notification-microservice
@@ -37,8 +37,8 @@ services:
     networks:
       - backend
     depends_on:
-      - db
-      - rmq-infrastructure
+      - postgres
+      - rabbitmq
 
   user-service:
     build: ./user-microservice
@@ -49,22 +49,22 @@ services:
     networks:
       - backend
     depends_on:
-      - db
-      - rmq-infrastructure
+      - postgres
+      - rabbitmq
 
-  db:
+  postgres:
     image: 'postgres:14.1-alpine'
     restart: on-failure
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
-    expose:
-      - 5432
+    ports:
+      - '5432:5432'
     networks:
       - backend
 
-  rmq-infrastructure:
+  rabbitmq:
     image: rabbitmq
     ports:
       - "5672:5672"
