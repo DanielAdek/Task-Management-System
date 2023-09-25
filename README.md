@@ -143,3 +143,11 @@ Task-Management-System
 - [ ] Event driving
 - [ ] Add caching
 - [ ] Improve error handling
+
+
+### Todo: how to make it better
+
+- [ ] Implement full authentication and authorization
+- [ ] Cache all edge cases and write test unit
+- [ ] CI/CD deployment integration
+- [ ] Add other services like: roles & permission, auth-service, token-service, push-notification
