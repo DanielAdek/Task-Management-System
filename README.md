@@ -41,7 +41,6 @@ Deployment is done with containers in mind. A Docker Compose file along with Doc
 
 ## Project Structure
 
-
 ```
 Task-Management-System
 ├── api-gateway
@@ -104,20 +103,25 @@ Task-Management-System
 5. `(any)microservices/domain` - The domain directory is found in each of the microservices project. It contains the model of project.
 
 6. `(any)microservice/application` - The application directory contains the service/controller for the microservice functionalities
+
 ## How to Run
 
-1. Must have 
+1. Prerequisite: configure the following 
 - [Node.js](https://nodejs.org/en/) - v18 Recommended
 - [Docker](https://docs.docker.com/get-docker/) - latest
 - [Docker Compose](https://docs.docker.com/compose/install/) - latest
 
 2. Create a `.env` file following the example of `.env.example` file in each of the microservice and the root project then
 
-3. Once the step 2 is achieved then on your Terminal, go into the project's root folder (`cd /project/root/folder`) and execute `docker-compose up`.
+3. Once the step 2 follow below steps:
+    - To run without docker
+      - Open four terminal, one for each service, and cd into service then run `yarn start` for each
+    - To run using docker
+      - Ensure to have docker then open terminal and run docker-compose up
+      
+4. Once the step 3 is done, the API Gateway will listening on [http://localhost](http://localhost:8080)
 
-4. Once the step 3 is done, the API Gateway will listening on [http://localhost](http://localhost:{yourPort})
-
-5. To test the API, head to the Swagger UI running at [http://localhost:{port}/api-docs](http://localhost:{port}/api-docs)
+5. To test the API, head to the Swagger UI running at [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
 
 ## Roadmap
 
