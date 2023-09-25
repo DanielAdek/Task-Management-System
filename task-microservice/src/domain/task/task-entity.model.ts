@@ -23,9 +23,9 @@ export class Task extends BaseEntity {
   @Column()
   assignee: string;
 
-  @ManyToOne(() => Project, (project) => project.tasks)
-  @JoinColumn({ name: "projectId" })
-  project: Project;
+  @ManyToOne(() => Project, (project) => project.tasks, { nullable: false})
+  @JoinColumn({ name: "projectId", referencedColumnName: "id" })
+  project: Project | string;
 
   @Column({ default: false })
   onDueNotify: boolean

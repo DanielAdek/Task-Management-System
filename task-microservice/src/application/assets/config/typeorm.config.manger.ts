@@ -13,6 +13,7 @@ class TypeormConfigManager extends EnvManager {
       password: this.getEnvValue('DATABASE_PASSWORD'),
       database: this.getEnvValue('DATABASE_NAME'),
       synchronize: this.getEnvValue('TYPEORM_DATABASE_SYNC') == 'true',
+      logging: true,
       entities: ['dist/**/*.entity.{ts,js}'],
       autoLoadEntities: true,
       ssl: this.isProduction(),

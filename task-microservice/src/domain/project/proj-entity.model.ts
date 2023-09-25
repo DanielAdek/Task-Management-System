@@ -13,6 +13,6 @@ export class Project extends BaseEntity {
   @Column()
   creator: string
 
-  @OneToMany(() => Task, (task) => task.project, { cascade: true })
+  @OneToMany(() => Task, (task) => task.project)
   tasks: Task[];
 }

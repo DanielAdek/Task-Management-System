@@ -57,11 +57,12 @@ export class TaskService {
 
       const task_request: Task = Object.assign(new Task(), {
         title, description, deadline: new Date(deadline),
-        priority, projectId, assignee, creator,
-        status: TASK_STATUS.BACKLOG
+        priority, assignee, creator,
+        status: TASK_STATUS.BACKLOG,
+        project: projectId
       });
 
-      const task: Task = await this.repository.save(task_request);
+      const task = await this.repository.save(task_request);
 
       const notify_payload = {
         title, description, deadline: new Date(deadline),
