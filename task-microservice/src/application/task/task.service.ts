@@ -119,23 +119,33 @@ export class TaskService {
    * @param __
    * @returns Promise(ApiResponseBuilder)
    */
-  @Cron(CronExpression.EVERY_6_HOURS)
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   public async handleDueTaskAsync(): Promise<void> {
     try {
       const query = { deadline: LessThanOrEqual(new Date()), onDueNotify: false };
 
-      const dueTasks: Task[] = await this.repository.find({ where: query, loadRelationIds: false, relations: ["Project"] });
+      const dueTasks: Task[] = await this.repository.find({ where: query });
 
-      await Promise.all([
-        dueTasks.map(({id }) => {
-          this.repository.update(id, { onDueNotify: true });
-        })
-      ]);
+      for await (const task of dueTasks) {
+        await this.repository.update(task.id, { onDueNotify: true });
 
-      await firstValueFrom(
-        this.notifyServiceClient.send(RMQ_TARGET.SEND_NOTIFY_TASK_DUE, dueTasks)
-      );
+        const user_response: IApiResponse<IUser> = await firstValueFrom(
+          this.userServiceClient.send<IApiResponse<IUser>>(RMQ_TARGET.GET_USER, { id: task.assignee })
+        );
 
+        const payload = {
+          title: task.title,
+          deadline: task.deadline,
+          recipient: user_response.data.email,
+          assignee: user_response.data.username
+        };
+
+        this.logger.log(payload)
+
+        await firstValueFrom(
+          this.notifyServiceClient.send<IApiResponse<object>>(RMQ_TARGET.SEND_NOTIFY_TASK_DUE, payload)
+        );
+      }
       this.logger.log("SEND_DUE_TASKS:Event:Triggered");
     } catch (error) {
       this.logger.error("Error:DueTask: " + error);
