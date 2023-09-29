@@ -127,7 +127,7 @@ export class TaskService {
 
       const dueTasks: Task[] = await this.repository.find({ where: query });
 
-      for await (const task of dueTasks) {
+      for (const task of dueTasks) {
         await this.repository.update(task.id, { onDueNotify: true });
 
         const user_response: IApiResponse<IUser> = await firstValueFrom(
