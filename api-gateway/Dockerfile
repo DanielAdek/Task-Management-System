@@ -1,7 +1,7 @@
 # Use an official Node.js runtime as the base image
 FROM node:18.15.0-alpine
 
-LABEL authors="Daniel Adek"
+LABEL authors="DanielAdek"
 
 # Set the working directory inside the container
 WORKDIR /usr/src/user-microservice
